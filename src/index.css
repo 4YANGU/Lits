@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@200..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink-950: #04070f;
+  --color-ink-900: #070d1a;
+  --color-ink-800: #0b1526;
+  --color-ink-700: #122036;
+  --color-ink-600: #1a2c4a;
+
+  --color-royal-500: #2450a4;
+  --color-royal-600: #1b3a7a;
+  --color-royal-700: #14295a;
+
+  --color-flame-100: #fff4d6;
+  --color-flame-200: #ffe9b0;
+  --color-flame-300: #ffd678;
+  --color-flame-400: #f6b73c;
+  --color-flame-500: #e0961e;
+  --color-flame-600: #b87413;
+
+  --color-cream-50: #fbf7ee;
+  --color-cream-100: #f4ecda;
+  --color-cream-200: #e9dcc0;
+  --color-cream-300: #d9c69c;
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-spin-slower: spin-slow 90s linear infinite;
+  --animate-spin-badge: spin-slow 16s linear infinite;
+  --animate-flicker: flicker 2.8s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+  --animate-scroll-dot: scroll-dot 2.2s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  42% { opacity: 0.84; transform: scale(0.96) rotate(-2deg); }
+  68% { opacity: 0.95; transform: scale(1.03) rotate(1.5deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+}
+
+@keyframes scroll-dot {
+  0% { transform: translateY(0); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: translateY(26px); opacity: 0; }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink-950 font-sans text-cream-50 antialiased;
+  }
+  ::selection {
+    background-color: var(--color-flame-400);
+    color: var(--color-ink-950);
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink-950);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-600);
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-flame-400);
+  }
+}
+
+/* Warm cinematic treatment for photography */
+@utility duotone {
+  filter: sepia(0.32) saturate(1.2) contrast(1.04) brightness(1.02);
+}
+
+/* Film-grain overlay for a tactile, printed feel */
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.055;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+}
